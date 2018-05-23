@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bouncing Ball Example</title>
+    <style>
+        canvas {
+            background: yellow;
+            border: 1px dotted black;
+        }
+    </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+        var context;
+        var dx = 6;
+        var dy = 6;
+        var y = 100;
+        var x = 100;
+        var k=1;
+        var i=0;
+        var g=0.3;
+  		
+
+
+
+        function draw() {
+
+
+
+
+            var canvas = document.getElementById('myCanvas');
+            var context = canvas.getContext('2d');
+            context.clearRect(0, 0, 300, 200);
+            context.beginPath();
+            context.fillStyle = "red";
+            context.arc(x, y, 20, 0, Math.PI * 2, true);
+            context.closePath();
+            context.fill();
+
+
+
+		if(dx >0.01 || dx<-0.01 || dy > 0.01 || dy < -0.01)
+{
+	    
+            k=k+0.005;
+	    i=i+0.005;
+            }
+ 	
+		else{
+
+k=k-0.001;
+i=i-0.001;
+}
+           
+
+            
+            context.beginPath();
+            context.arc(x, y, 13, Math.PI * k, Math.PI * i, true);
+            context.fillStyle="green";
+		 context.strokeStyle="green";
+            context.stroke();
+            context.closePath();
+
+
+            context.beginPath();
+            context.arc(x, y, 1, Math.PI * (k+1), Math.PI * (i+1), true);
+            context.strokeStyle="red";
+context.fillStyle="red";
+            context.stroke();
+            context.closePath();
+            
+
+
+
+
+
+
+
+
+
+ 	   if( dx>0)
+		 dx = dx-0.01;
+	    else if( dx <0)
+		 dx = dx+0.01;
+	    else if( dx =0)
+		 dx = 0;
+	   
+ 	    if( dy>0)
+		 dy = dy-0.01;
+	    else if( dy <0)
+		 dy = dy+0.01;
+ 	    else if( dy =0)
+		 dy = 0;
+
+
+	   
+
+
+            if (x < (0 + 20) || x > (300 - 20))
+                dx = -dx;
+            if (y < (0 + 20) || y > (200 - 20))
+                dy = -dy;
+
+            x += dx;
+            y += dy;
+
+$(document).mousemove(function(e) {
+      mouseX = e.pageX;
+      mouseY = e.pageY;
+
+ if ( mouseX - 20 < x && mouseY - 20 < y  )
+{
+                dx = dx+0.0001 ;	
+		dy = dy+0.0001 ;
+}
+	    else if( x < mouseX + 20 && y <  mouseY + 20 )
+{
+	 	dx = dx-0.0001 ;
+		dy = dy-0.0001 ;
+}
+	    else if( mouseX - 20 < x &&  y <  mouseY + 20 )
+{
+                dx = dx+0.0001 ;
+		dy = dy-0.0001 ;
+}
+	    else if( x <  mouseX + 20 && mouseY - 20 < y)
+{
+	 	dx = dx-0.0001;
+		dy = dy+0.0001 ;
+}
+      
+ });
+ 
+
+
+	   
+}
+
+
+
+
+        setInterval(draw, 10);
+
+
+
+
+    </script>
+
+
+
+</head>
+<body>
+    <canvas id="myCanvas" width="300" height="200"></canvas>
+</body>
+</html>
